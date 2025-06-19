@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("5hGETq3RRTk5S6AufnVRrMvJznyEmEUYT4afQMNVFJYM");
+declare_id!("2naNy35AmR4hgg4sXqe7vwBtkQDciHGtFbmfheCVo8vp");
 
 #[program]
 pub mod tweet_program {
@@ -21,6 +21,21 @@ pub mod tweet_program {
         msg!("Tweet Saved!!");
         Ok(())
     }
+
+    pub fn deletetweet(ctx: Context<DeleteTweet>) -> Result<()> {
+        msg!("Tweet Deleted!!");
+        Ok(())
+    }
+
+    pub fn updatetweet(ctx: Context<UpdateTweet>, new_msg: String) -> Result<()> {
+        let tweet_account = &mut ctx.accounts.tweet_account;
+
+        tweet_account.time = Clock::get()?.unix_timestamp;
+        tweet_account.message = new_msg;
+
+        msg!("Tweet Updated!!");
+        Ok(())
+    }
 }
 
 #[derive(Accounts)]
@@ -39,6 +54,28 @@ pub struct SendTweet<'info> {
     pub user: Signer<'info>,
 
     pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct DeleteTweet<'info> {
+    #[account(
+        mut,
+        close = author,
+        has_one = author
+    )]
+    pub tweet_account: Account<'info, Tweet>,
+
+    #[account(mut)]
+    pub author: Signer<'info>,
+}
+
+#[derive(Accounts)]
+pub struct UpdateTweet<'info> {
+    #[account(mut, has_one = author)]
+    pub tweet_account: Account<'info, Tweet>,
+
+    #[account(mut)]
+    pub author: Signer<'info>,
 }
 
 #[account]

@@ -5,11 +5,11 @@ package_manager = "yarn"
 resolution = true
 skip-lint = false
 
-[programs.localnet]
-tweet_program = "5hGETq3RRTk5S6AufnVRrMvJznyEmEUYT4afQMNVFJYM"
-
 [programs.devnet]
-tweet_program = "5hGETq3RRTk5S6AufnVRrMvJznyEmEUYT4afQMNVFJYM"
+tweet_program = "2naNy35AmR4hgg4sXqe7vwBtkQDciHGtFbmfheCVo8vp"
+
+[programs.localnet]
+tweet_program = "2naNy35AmR4hgg4sXqe7vwBtkQDciHGtFbmfheCVo8vp"
 
 [registry]
 url = "https://api.apr.dev"

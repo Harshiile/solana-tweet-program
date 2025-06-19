@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/tweet_program.json`.
  */
 export const Idl = {
-    "address": "5hGETq3RRTk5S6AufnVRrMvJznyEmEUYT4afQMNVFJYM",
+    "address": "2naNy35AmR4hgg4sXqe7vwBtkQDciHGtFbmfheCVo8vp",
     "metadata": {
         "name": "tweetProgram",
         "version": "0.1.0",
@@ -13,6 +13,34 @@ export const Idl = {
         "description": "Created with Anchor"
     },
     "instructions": [
+        {
+            "name": "deletetweet",
+            "discriminator": [
+                196,
+                20,
+                89,
+                184,
+                66,
+                117,
+                25,
+                64
+            ],
+            "accounts": [
+                {
+                    "name": "tweetAccount",
+                    "writable": true
+                },
+                {
+                    "name": "author",
+                    "writable": true,
+                    "signer": true,
+                    "relations": [
+                        "tweetAccount"
+                    ]
+                }
+            ],
+            "args": []
+        },
         {
             "name": "initialize",
             "discriminator": [
@@ -59,6 +87,39 @@ export const Idl = {
             "args": [
                 {
                     "name": "msg",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "updatetweet",
+            "discriminator": [
+                110,
+                138,
+                191,
+                168,
+                48,
+                143,
+                189,
+                22
+            ],
+            "accounts": [
+                {
+                    "name": "tweetAccount",
+                    "writable": true
+                },
+                {
+                    "name": "author",
+                    "writable": true,
+                    "signer": true,
+                    "relations": [
+                        "tweetAccount"
+                    ]
+                }
+            ],
+            "args": [
+                {
+                    "name": "newMsg",
                     "type": "string"
                 }
             ]
